@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>OvaTrace – PCOS Early Risk Detection Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>:root{--bg:#faf7fb;--card:#fff;--tx:#241a2b;--mu:#6d6275;--ln:#e8dfee;--ac:#9b3d8f;--ac2:#2a9d8f;--wa:#e07a3f;--rd:#c0392b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171119;--card:#221a26;--tx:#f1eaf4;--mu:#a597ad;--ln:#3a2e40;--ac:#d77ccb;--ac2:#4fc3b3;--wa:#f09a63}}
+:root[data-theme="dark"]{--bg:#171119;--card:#221a26;--tx:#f1eaf4;--mu:#a597ad;--ln:#3a2e40;--ac:#d77ccb;--ac2:#4fc3b3;--wa:#f09a63}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{padding:28px 20px 8px;max-width:1080px;margin:auto}header .t{margin:0 0 4px;font-size:clamp(24px,4vw,34px);font-weight:800}header .t b{color:var(--ac)}header p{margin:0;color:var(--mu)}
+nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;display:flex;gap:6px;overflow-x:auto;padding:10px 20px;max-width:1080px;margin:auto;border-bottom:1px solid var(--ln)}
+nav button{border:1px solid var(--ln);background:var(--card);color:var(--tx);padding:7px 14px;border-radius:99px;cursor:pointer;white-space:nowrap;font:inherit;font-size:14px}nav button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+main{max-width:1080px;margin:auto;padding:16px 20px 60px}
+footer{text-align:center;color:var(--mu);font-size:12px;padding:0 20px 30px}
+section{display:none}section.on{display:block}h1{margin:0 0 4px;font-size:clamp(24px,4vw,34px)}h2{margin:0;font-size:24px}.sub{color:var(--mu);margin:2px 0 18px}h3{margin:22px 0 10px;font-size:17px}
+.g{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}.c{background:var(--card);border:1px solid var(--ln);border-radius:14px;box-shadow:0 1px 2px rgba(80,30,80,.05);padding:16px;min-width:0}.c h4{margin:0 0 6px;font-size:15px}
+.k{font-size:28px;font-weight:800;color:var(--ac)}.kl{color:var(--mu);font-size:13px}.cv{position:relative;height:270px}.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:7px 9px;border-bottom:1px solid var(--ln);text-align:right;white-space:nowrap}th{color:var(--mu);font-weight:600}th:first-child,td:first-child{text-align:left}
+.chip{display:inline-block;background:var(--card);border:1px solid var(--ln);padding:6px 12px;border-radius:99px;margin:4px 4px 4px 0;cursor:pointer;font-size:13px}.chip:hover,.chip.on{border-color:var(--ac);color:var(--ac)}
+.ex{background:var(--card);border-left:4px solid var(--ac);padding:10px 14px;border-radius:8px;margin-top:8px;font-size:14px;min-height:44px}
+.ok{color:var(--ac2);font-weight:700}.no{color:var(--mu)}code{background:var(--ln);padding:1px 6px;border-radius:5px;font-size:13px}
+.step{display:flex;gap:10px;align-items:center;margin:6px 0}.step i{background:var(--ac);color:#fff;border-radius:50%;width:24px;height:24px;display:grid;place-items:center;font-size:12px;font-style:normal;flex-shrink:0}
+ul{padding-left:20px;margin:6px 0}li{margin:4px 0}
+.fm{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}.fm label{font-size:13px;color:var(--mu);display:block}.fm input,.fm select{width:100%;padding:8px;border-radius:8px;border:1px solid var(--ln);background:var(--bg);color:var(--tx);font:inherit}
+.btn{margin-top:14px;background:var(--ac);color:#fff;border:0;padding:12px 22px;border-radius:10px;font:inherit;font-weight:700;cursor:pointer}
+.gauge{height:16px;border-radius:9px;background:linear-gradient(90deg,#2a9d8f,#e9c46a,#e07a3f,#c0392b);position:relative;margin:12px 0}.gauge i{position:absolute;top:-4px;width:4px;height:24px;background:var(--tx);border-radius:2px}
+.hm{display:grid;gap:2px;font-size:11px}.hm div{padding:7px 2px;text-align:center;border-radius:3px;white-space:nowrap;overflow:hidden}
+.note{font-size:12.5px;color:var(--mu);border-left:3px solid var(--wa);padding:4px 10px;margin-top:12px}
+</style></head><body>
+<header><div class="t">Ova<b>Trace</b></div><p>PCOS/PCOD Early Risk Detection &amp; Analysis · Interactive analytics + machine-learning dashboard</p></header>
+<nav id="sb"></nav>
+<main>
+<section id="s0"><h1>OvaTrace Analytics Dashboard</h1><p class="sub">Comprehensive Implementation of Data Analytics Fundamentals in Healthcare — PCOS/PCOD Early Risk Detection</p>
+<h3>Project Overview</h3><div class="c"><p style="margin:0" id="ov"></p></div><div class="g" id="kp" style="margin-top:14px"></div>
+<h3>Analytics Types</h3><div class="g" id="at"></div>
+<h3>Data Analytics Lifecycle ⓘ</h3><div class="c">📌 <b>Click any term</b> to see what it means.<div id="lc" style="margin-top:8px"></div><div class="ex" id="lcx"></div></div>
+<h3>Applications ⓘ</h3><div class="c">🩺 <b>Click any application</b> to learn why it matters.<div id="ap" style="margin-top:8px"></div><div class="ex" id="apx"></div></div></section>
+
+<section id="s1"><h2>Data Wrangling &amp; Feature Engineering</h2><p class="sub">Data Cleaning, Transformation, and Feature Creation</p>
+<h3>Dataset Profile &amp; Quality Metrics</h3><div class="g" id="pf"></div>
+<h3>Data Transformation Process</h3><div class="c" id="tp"></div>
+<div class="g"><div><h3>Cleaning Steps Applied</h3><div class="c" id="cl"></div></div><div><h3>Feature Engineering</h3><div class="c" id="fe"></div></div></div></section>
+
+<section id="s2"><h2>Advanced Preprocessing: Standardization, Normalization &amp; Encoding</h2><p class="sub">Feature Scaling and Categorical Encoding Strategies</p>
+<h3>Categorical Variable Encoding</h3><div class="c"><p class="kl">Label encoding applied to categorical features for machine learning compatibility</p><div class="tw"><table id="en"></table></div></div>
+<h3>Feature Scaling: Standardization vs Normalization</h3><div class="g"><div class="c"><h4>Raw vs Z-score vs Min-Max</h4><div class="tw"><table id="sc"></table></div><p class="kl"><b>Standardization (Z-score):</b> μ=0, σ=1 | <b>Normalization (Min-Max):</b> [0, 1] range</p></div><div class="c"><h4>Original vs Z-score BMI distribution</h4><div class="cv"><canvas id="c_sc"></canvas></div></div></div>
+<h3>Dispersion Metrics &amp; Covariance Analysis</h3><div class="g"><div class="c"><h4>Dispersion</h4><div class="tw"><table id="dp"></table></div></div><div class="c"><h4>Correlation matrix</h4><div class="tw"><div class="hm" id="hm"></div></div></div></div>
+<div class="c" style="margin-top:14px"><h4>🔍 Key Concepts</h4><ul><li><b>Variance:</b> how spread out data is from the mean</li><li><b>Std Dev:</b> square root of variance, same units as data</li><li><b>Covariance:</b> joint variability between feature pairs</li><li><b>Correlation:</b> normalized covariance, bounded to [-1, 1]</li></ul></div>
+<h3>Distribution Shape: Skewness &amp; Kurtosis</h3><div class="g"><div class="c"><div class="cv"><canvas id="c_sk"></canvas></div></div><div class="c"><h4>📊 Distribution Analysis</h4><ul><li><b>Skewness:</b> asymmetry of distribution</li><li><b>Symmetric:</b> skewness ≈ 0</li><li><b>Right-skewed:</b> positive skewness</li><li><b>Left-skewed:</b> negative skewness</li><li><b>Kurtosis:</b> tail heaviness and peakedness</li></ul></div></div></section>
+
+<section id="s3"><h2>Exploratory Data Analysis &amp; Visualization</h2><p class="sub">Univariate, Bivariate, and Multivariate Analysis</p>
+<h3>Key Performance Indicators</h3><div class="g" id="ki"></div>
+<h3>Summary Statistics</h3><div class="c tw"><table id="ss"></table></div>
+<h3>Visualizations Gallery</h3><div class="g" id="gal"></div></section>
+
+<section id="s4"><h2>Statistical Foundations &amp; Hypothesis Testing</h2><p class="sub">T-Tests, Chi-Square Tests, and Statistical Validation</p><div class="c">Statistical tests validate relationships between variables and determine if observed differences are statistically significant (α = 0.05)</div>
+<div class="g"><div><h3>Welch t-tests: PCOS vs No PCOS</h3><div class="c tw"><table id="tt"></table></div></div><div><h3>Chi-square tests of independence</h3><div class="c tw"><table id="ch"></table></div><p class="kl">Cramér's φ = effect size (0.1 small, 0.3 medium, 0.5 large)</p></div></div></section>
+
+<section id="s5"><h2>Dimensionality Reduction: PCA &amp; LDA</h2><p class="sub">Feature Space Reduction with Maximum Information Retention</p>
+<div class="c">PCA and LDA reduce dimensionality while preserving key information. Both use 8 standardized features: Age, BMI, Weight, Waist:Hip, Cycle length, AMH, Total Follicles, FSH/LH.</div>
+<h3>🔴 Principal Component Analysis (PCA) - Unsupervised Method</h3><div class="c"><b>Purpose:</b> captures maximum variance without class labels. <b>Use case:</b> exploration, noise reduction, visualization.</div>
+<div class="g" style="margin-top:14px"><div class="c"><h4>Scree plot &amp; cumulative variance</h4><div class="cv"><canvas id="c_scree"></canvas></div></div><div class="c"><h4>PC1 vs PC2 projection</h4><div class="cv"><canvas id="c_pc"></canvas></div></div><div class="c"><h4>Feature loadings</h4><div class="cv"><canvas id="c_ld"></canvas></div></div></div>
+<div class="c" style="margin-top:14px"><h4>🔍 PCA Interpretation Guide</h4><ul><li><b>Scree plot:</b> steeper drops = more variance captured</li><li><b>Cumulative variance:</b> components needed for 95%: <b id="p95"></b></li><li><b>Loadings:</b> blue bars = positive, red = negative</li></ul></div>
+<h3>🟢 Linear Discriminant Analysis (LDA) - Supervised Method</h3><div class="c"><b>Purpose:</b> finds the combination of features that best separates PCOS from non-PCOS. With 2 classes LDA yields 1 discriminant (LD1).</div>
+<div class="g" style="margin-top:14px"><div class="c"><h4>LD1 projection by class</h4><div class="cv"><canvas id="c_lda"></canvas></div></div><div class="c"><h4>LD1 coefficients</h4><div class="cv"><canvas id="c_lc"></canvas></div></div><div class="c"><h4>Class means</h4><div class="tw"><table id="cm"></table></div></div></div></section>
+
+<section id="s6"><h2>Model Implementation: Random Forest Classifier</h2><p class="sub">Classification Model for PCOS Risk Prediction</p><h3>Model Performance Metrics</h3><div class="g" id="mk"></div>
+<h3>Model Evaluation Visualizations</h3><div class="g"><div class="c"><h4>ROC curve</h4><div class="cv"><canvas id="c_roc"></canvas></div></div><div class="c"><h4>Feature importance</h4><div class="cv"><canvas id="c_fi"></canvas></div></div><div class="c"><h4>Confusion matrix (test set)</h4><div id="cmx"></div></div></div></section>
+
+<section id="s7"><h2>Hidden Insights &amp; Cross-Analysis</h2><p class="sub">Deeper comparisons discovered across wrangling, EDA, statistics, dimensionality reduction, and modeling</p>
+<h3>Executive Insight Summary</h3><div class="c"><ul id="ex1"></ul></div>
+<h3>Hidden Comparisons</h3><div class="g"><div class="c"><h4>PCOS rate by number of symptoms</h4><div class="cv"><canvas id="c_sy"></canvas></div></div><div class="c"><h4>PCOS rate by risk combination</h4><div class="cv"><canvas id="c_cb"></canvas></div></div></div>
+<h3>Cross-Module Findings</h3><div class="c"><ul id="ex2"></ul></div></section>
+
+<section id="s8"><h2>Patient Risk Assessment Tool</h2><p class="sub">Real-time Risk Prediction Using Trained Model</p>
+<h3>Assessment Inputs &amp; Derived Indicators</h3><div class="c"><p class="kl">The engine evaluates demographic, body-composition, cycle, symptom and lifestyle variables. Waist:Hip ratio and BMI are derived automatically.</p>
+<div class="fm" id="fm"></div><button class="btn" id="go">🎯 Analyze Risk Profile</button></div>
+<div class="c" id="res" style="margin-top:14px;display:none"><div class="k" id="pv"></div><div class="gauge"><i id="gi"></i></div><b id="lv"></b><div class="cv" style="height:220px;margin-top:12px"><canvas id="c_ct"></canvas></div><div class="note">Educational demo — not a medical diagnosis. Score comes from <span id="msrc"></span>, using 12 non-invasive features (cross-validated AUC <span id="cauc"></span>). Consult a clinician.</div></div></section>
+
+<section id="s9"><h2>Lifestyle Recommendations</h2><p class="sub">What the data says about diet, activity and weight — plus a personalised plan and a "what-if" simulator</p>
+<h3>What this dataset shows</h3><div class="g"><div class="c"><h4>PCOS rate by fast food &amp; exercise</h4><div class="cv"><canvas id="c_l1"></canvas></div></div><div class="c"><h4>PCOS rate by BMI band &amp; exercise</h4><div class="cv"><canvas id="c_l2"></canvas></div></div></div>
+<div class="note"><b>Read carefully:</b> fast-food intake shows a strong association with PCOS (about 50% vs 11–26%). Exercise does <i>not</i> look protective here, and exercisers with BMI ≥30 are only n=4. This is likely because patients already diagnosed or symptomatic are more likely to start exercising (reverse causation) and because exercise is a single self-reported yes/no. This data cannot show that exercise does or doesn't help.</div>
+<h3>Personalised plan &amp; what-if simulator</h3><div class="c"><div class="fm" id="lf"></div><div id="lsy" class="ch" style="margin:12px 0"></div><button class="btn" id="lgo" style="margin-top:0">🥗 Build my lifestyle plan</button></div>
+<div id="lres" style="display:none"><div class="g" style="margin-top:14px"><div class="c"><h4>What-if: estimated risk under each change</h4><p class="kl">Same logistic model as the Risk Prediction tab. Shows how the model's score shifts, not a guarantee of outcome.</p><div class="cv"><canvas id="c_l3"></canvas></div></div><div class="c"><h4>Your recommendations</h4><ul id="lrec"></ul></div></div></div>
+<h3>General guidance</h3><div class="g" id="lg"></div>
+<div class="note">General wellness information from widely accepted PCOS guidance, not medical advice or a treatment plan. Please work with a doctor or dietitian, especially before changing medication, starting intense exercise, or making big diet changes.</div></section>
+</main>
+<footer>© 2026 OvaTrace · Educational analytics demo, not medical advice</footer>
+<script>
+const D=__DATA__;const $=s=>document.querySelector(s);
+const tb=(el,h,r)=>$(el).innerHTML='<tr>'+h.map(x=>`<th>${x}</th>`).join('')+'</tr>'+r.map(x=>'<tr>'+x.map(v=>`<td>${v}</td>`).join('')+'</tr>').join('');
+const fp=p=>p<.001?'<0.001':p.toFixed(3),sig=p=>p<.05?'<span class="ok">Yes</span>':'<span class="no">No</span>';
+const A='#9b3d8f',B='#2a9d8f',W='#e07a3f',R='#c0392b';Chart.defaults.color='#8a7e93';
+const ch={};function mk(id,cfg){if(ch[id])ch[id].destroy();cfg.options=Object.assign({responsive:true,maintainAspectRatio:false},cfg.options||{});ch[id]=new Chart($('#'+id),cfg)}
+const N=[['Introduction','📘'],['Data Wrangling','🧹'],['Preprocessing','⚙️'],['EDA & Visualization','📊'],['Hypothesis Testing','🧪'],['Dimensionality Reduction','🧭'],['Model Performance','🤖'],['Hidden Insights','💡'],['Risk Prediction','🎯'],['Lifestyle Plan','🥗']];
+const done={},P={};
+N.forEach((n,i)=>{const b=document.createElement('button');b.innerHTML=`${n[1]} ${n[0]}`;b.onclick=()=>go(i);$('#sb').appendChild(b)});
+function go(i){document.querySelectorAll('section').forEach((s,j)=>s.classList.toggle('on',i==j));document.querySelectorAll('#sb button').forEach((b,j)=>b.classList.toggle('on',i==j));if(!done[i]){done[i]=1;P[i]()}window.scrollTo(0,0)}
+const kpi=(a,b)=>`<div class="c"><div class="k">${a}</div><div class="kl">${b}</div></div>`;
+const grp=(id,lab,neg,pos,type='bar')=>mk(id,{type,data:{labels:lab,datasets:[{label:'No PCOS',data:neg,backgroundColor:B+'aa'},{label:'PCOS',data:pos,backgroundColor:A+'aa'}]}});
+P[0]=()=>{$('#ov').textContent=`This dashboard analyzes ${D.n} patient records (${D.cols} columns) from a PCOS clinical dataset to find which symptoms, body measures and cycle patterns are associated with PCOS, and to build a model that flags high-risk profiles before relying on a confirmed diagnosis.`;
+$('#kp').innerHTML=kpi(D.n,'Patients')+kpi(D.kpi.prev+'%','PCOS prevalence')+kpi(D.rf.auc,'Random Forest test AUC')+kpi(D.calc.auc,'Early-risk (12 features) AUC');
+$('#at').innerHTML=[['Descriptive','What happened? Summaries, distributions, prevalence.'],['Diagnostic','Why? Hypothesis tests, correlations, risk factors.'],['Predictive','What will happen? Random Forest &amp; risk calculator.'],['Prescriptive','What to do? Flag high-risk profiles for clinical evaluation.']].map(a=>`<div class="c"><h4>${a[0]}</h4><span class="kl">${a[1]}</span></div>`).join('');
+const chips=(id,x,o)=>{$(id).innerHTML=Object.keys(x).map(k=>`<span class="chip">${k}</span>`).join('');$(id).onclick=e=>{if(e.target.classList.contains('chip')){$(o).textContent=x[e.target.textContent];$(id).querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c==e.target))}}};
+chips('#lc',{'Data Collection':'Gathering clinical, lifestyle and ultrasound data from patients.','Data Cleaning':'Fixing invalid values, filling gaps, removing empty columns.','Exploration':'Charts and statistics to understand patterns.','Modeling':'Training algorithms such as Random Forest to predict PCOS.','Interpretation':'Turning results into findings clinicians can act on.','Deployment':'Making the model available as a tool, like the Risk Assessment page.'},'#lcx');
+chips('#ap',{'Early screening':'Symptom-based scores can prioritize who needs an ultrasound or hormone panel.','Risk stratification':'Grouping patients by low / moderate / high risk to allocate care.','Lifestyle counseling':'Identifying modifiable factors such as weight gain, diet and exercise.','Clinical decision support':'Giving clinicians a second, data-driven opinion.'},'#apx')};
+P[1]=()=>{$('#pf').innerHTML=kpi(D.n,'Rows')+kpi(D.cols,'Columns (raw)')+kpi(D.miss,'Missing cells (raw)')+kpi(D.dup,'Duplicate rows')+kpi('100%','Completeness after cleaning');
+const st=['Raw Excel (Full_new sheet)','Clean &amp; fix types','Impute missing','Recode categories','Engineer features','Analysis-ready dataset'];$('#tp').innerHTML=st.map((s,i)=>`<div class="step"><i>${i+1}</i>${s}</div>`).join('');
+$('#cl').innerHTML='<ul><li>Dropped the empty trailing column <code>Unnamed: 44</code> and stripped column-name spaces</li><li>Converted AMH (stored as text) to numeric; '+D.amh_bad+' invalid value set to missing</li><li>Filled missing AMH and marriage years with median</li><li>Filled missing Fast food with mode</li><li>Recomputed BMI from weight and height</li><li>Cycle recoded: 2 → regular (0), 4 → irregular (1)</li></ul>';
+$('#fe').innerHTML='<ul><li><b>Total_Follicles</b><br><code>Follicle_L + Follicle_R</code></li><li><b>Symptom_Count</b><br><code>weight gain + hair growth + skin darkening + hair loss + pimples</code></li><li><b>Irregular_Cycle</b><br><code>Cycle(R/I) == 4</code></li><li><b>BMI</b><br><code>Weight / (Height/100)²</code></li></ul>'};
+P[2]=()=>{tb('#en',['Feature','Original','Encoded'],[['Cycle(R/I)','2 / 4','0 = Regular, 1 = Irregular'],['PCOS (Y/N)','N / Y','0 / 1'],['Weight gain, Hair growth, Skin darkening, Hair loss, Pimples','N / Y','0 / 1'],['Fast food, Reg. exercise, Pregnant','N / Y','0 / 1']]);
+tb('#sc',['Feature','Mean','SD','Z mean','Z SD','MM min','MM max'],D.scale);
+const H=D.hist.BMI;mk('c_sc',{type:'bar',data:{labels:H.bins,datasets:[{label:'No PCOS',data:H.neg,backgroundColor:B+'aa'},{label:'PCOS',data:H.pos,backgroundColor:A+'aa'}]},options:{plugins:{title:{display:true,text:'BMI counts (raw units) → z-score preserves the same shape with μ=0, σ=1'}}}});
+tb('#dp',['Feature','Variance','Std Dev','CV %','IQR'],D.disp);
+const l=D.summary.map(x=>x[0].slice(0,8)),n=l.length;$('#hm').style.gridTemplateColumns=`72px repeat(${n},1fr)`;let s='<div></div>'+l.map(x=>`<div>${x}</div>`).join('');
+D.corr.forEach((r,i)=>{s+=`<div style="text-align:left">${l[i]}</div>`+r.map(v=>`<div style="background:${v>=0?`rgba(155,61,143,${Math.abs(v)})`:`rgba(192,57,43,${Math.abs(v)})`};color:${Math.abs(v)>.5?'#fff':'inherit'}">${v.toFixed(2)}</div>`).join('')});$('#hm').innerHTML=s;
+mk('c_sk',{type:'bar',data:{labels:D.skew.map(x=>x[0]),datasets:[{label:'Skewness',data:D.skew.map(x=>x[1]),backgroundColor:A},{label:'Excess kurtosis',data:D.skew.map(x=>x[2]),backgroundColor:W}]}})};
+P[3]=()=>{$('#ki').innerHTML=kpi(D.n,'Patients')+kpi(D.kpi.prev+'%','PCOS prevalence')+kpi(D.kpi.age,'Mean age (yrs)')+kpi(D.kpi.bmi,'Mean BMI')+kpi(D.kpi.irr+'%','Irregular cycles');
+tb('#ss',['Feature','Mean','SD','Min','Q1','Median','Q3','Max'],D.summary);
+$('#gal').innerHTML=Object.keys(D.hist).map((k,i)=>`<div class="c"><h4>${k} distribution by PCOS status</h4><div class="cv"><canvas id="g${i}"></canvas></div></div>`).join('')+`<div class="c"><h4>Age vs BMI</h4><div class="cv"><canvas id="gs"></canvas></div></div>`;
+Object.entries(D.hist).forEach(([k,h],i)=>grp('g'+i,h.bins,h.neg,h.pos));
+const sc=k=>D.scatter.filter(p=>p[2]==k).map(p=>({x:p[0],y:p[1]}));mk('gs',{type:'scatter',data:{datasets:[{label:'No PCOS',data:sc(0),backgroundColor:B+'99',pointRadius:3},{label:'PCOS',data:sc(1),backgroundColor:A+'99',pointRadius:3}]},options:{scales:{x:{title:{display:true,text:'Age'}},y:{title:{display:true,text:'BMI'}}}}})};
+P[4]=()=>{tb('#tt',['Variable','PCOS mean','No-PCOS mean','t','p','Significant'],D.ttest.map(r=>[r[0],r[1],r[2],r[3],fp(r[4]),sig(r[4])]));tb('#ch',['Factor','χ²','p','φ','Significant'],D.chi.map(r=>[r[0],r[1],fp(r[2]),r[3],sig(r[2])]))};
+P[5]=()=>{const v=D.pca.var;let c=0;const cu=v.map(x=>c+=x);$('#p95').textContent=(cu.findIndex(x=>x>=95)+1)+' of '+v.length;
+mk('c_scree',{data:{labels:v.map((_,i)=>'PC'+(i+1)),datasets:[{type:'bar',label:'Variance %',data:v,backgroundColor:A},{type:'line',label:'Cumulative %',data:cu,borderColor:W,pointRadius:3}]}});
+const sc=k=>D.pca.pts.filter(p=>p[2]==k).map(p=>({x:p[0],y:p[1]}));mk('c_pc',{type:'scatter',data:{datasets:[{label:'No PCOS',data:sc(0),backgroundColor:B+'88',pointRadius:3},{label:'PCOS',data:sc(1),backgroundColor:A+'88',pointRadius:3}]},options:{scales:{x:{title:{display:true,text:'PC1 ('+v[0]+'%)'}},y:{title:{display:true,text:'PC2 ('+v[1]+'%)'}}}}});
+const L=D.pca.load;mk('c_ld',{type:'bar',data:{labels:L.map(x=>x[0]),datasets:[{label:'PC1',data:L.map(x=>x[1]),backgroundColor:L.map(x=>x[1]>=0?A:R)},{label:'PC2',data:L.map(x=>x[2]),backgroundColor:L.map(x=>x[2]>=0?A+'77':R+'77')}]},options:{indexAxis:'y'}});
+mk('c_lda',{type:'bar',data:{labels:D.lda.bins,datasets:[{label:'No PCOS',data:D.lda.neg,backgroundColor:B+'aa'},{label:'PCOS',data:D.lda.pos,backgroundColor:A+'aa'}]},options:{scales:{x:{title:{display:true,text:'LD1'}}}}});
+mk('c_lc',{type:'bar',data:{labels:D.lda.coef.map(x=>x[0]),datasets:[{data:D.lda.coef.map(x=>x[1]),backgroundColor:D.lda.coef.map(x=>x[1]>=0?A:R)}]},options:{indexAxis:'y',plugins:{legend:{display:false}}}});
+tb('#cm',['Feature','No PCOS','PCOS'],D.lda.means)};
+P[6]=()=>{const r=D.rf;$('#mk').innerHTML=kpi(r.acc,'Accuracy')+kpi(r.prec,'Precision')+kpi(r.rec,'Recall (sensitivity)')+kpi(r.f1,'F1 score')+kpi(r.auc,'ROC-AUC (test)')+kpi(r.cvauc+' ± '+r.cvsd,'5-fold CV AUC');
+mk('c_roc',{type:'line',data:{datasets:[{label:'Random Forest',data:r.roc.map(p=>({x:p[0],y:p[1]})),borderColor:A,pointRadius:0,tension:.2},{label:'Chance',data:[{x:0,y:0},{x:1,y:1}],borderColor:'#999',borderDash:[4,4],pointRadius:0}]},options:{scales:{x:{type:'linear',min:0,max:1,title:{display:true,text:'False-positive rate'}},y:{min:0,max:1,title:{display:true,text:'True-positive rate'}}}}});
+mk('c_fi',{type:'bar',data:{labels:r.imp.map(x=>x[0]),datasets:[{data:r.imp.map(x=>x[1]),backgroundColor:A}]},options:{indexAxis:'y',plugins:{legend:{display:false}}}});
+const m=r.cm,c=(v,l,g)=>`<div style="background:${g?'rgba(42,157,143,.22)':'rgba(192,57,43,.2)'};padding:14px;border-radius:10px;text-align:center"><div class="k" style="color:inherit">${v}</div><div class="kl">${l}</div></div>`;
+$('#cmx').innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${c(m[0],'True negative',1)}${c(m[1],'False positive',0)}${c(m[2],'False negative',0)}${c(m[3],'True positive',1)}</div><p class="kl">Trained on ${r.ntr}, tested on ${r.nte} patients (stratified split).</p>`};
+P[7]=()=>{const c=D.combo,r=D.rf;
+$('#ex1').innerHTML=[`Patients with irregular cycles <b>and</b> excess hair growth have an ${c['irr+hg'][0]}% PCOS rate (n=${c['irr+hg'][1]}); with irregular cycles + skin darkening + weight gain it is ${c['irr+sd+wg'][0]}%.`,`Patients with a regular cycle and none of the 5 symptoms: only ${c.none[0]}% have PCOS (n=${c.none[1]}).`,`Total follicles ≥20 → ${c['fol>=20'][0]}% PCOS vs ${c['fol<10'][0]}% below 10, the single strongest separator.`,`Random Forest reaches AUC ${r.auc} on held-out data (CV ${r.cvauc}).`].map(x=>`<li>${x}</li>`).join('');
+mk('c_sy',{type:'bar',data:{labels:D.symrate.map(x=>x[0]+' symptoms (n='+x[1]+')'),datasets:[{data:D.symrate.map(x=>x[2]),backgroundColor:A}]},options:{plugins:{legend:{display:false}},scales:{y:{max:100,title:{display:true,text:'PCOS rate %'}}}}});
+const ks=[['No symptoms + regular',c.none],['Irregular + hair growth',c['irr+hg']],['Irregular + darkening + wt gain',c['irr+sd+wg']],['AMH < 2',c['amh<2']],['AMH ≥ 5',c['amh>=5']],['Follicles < 10',c['fol<10']],['Follicles ≥ 20',c['fol>=20']]];
+mk('c_cb',{type:'bar',data:{labels:ks.map(x=>x[0]+' (n='+x[1][1]+')'),datasets:[{data:ks.map(x=>x[1][0]),backgroundColor:W}]},options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{max:100}}}});
+$('#ex2').innerHTML=[`<b>Wrangling → EDA:</b> BMI recomputed from height/weight; mean BMI ${D.kpi.bmi}, irregular cycles in ${D.kpi.irr}% of patients.`,`<b>Statistics → Model:</b> the variables with the largest t/χ² effects (follicles, skin darkening, hair growth, cycle) are also the model's top-importance features.`,`<b>PCA:</b> PC1 (${D.pca.var[0]}% variance) correlates |r|=${D.pca_sep} with PCOS status; PC2 |r|=${D.pca_sep2}. Unsupervised structure only partially reflects the diagnosis.`,`<b>LDA:</b> a single supervised axis classifies ${(D.lda.acc*100).toFixed(1)}% of patients correctly (in-sample).`,`<b>Lifestyle:</b> fast food without exercise → ${c['ff+noex'][0]}% PCOS; fast food with exercise → ${c['ff+ex'][0]}% (observational, self-reported).`].map(x=>`<li>${x}</li>`).join('')};
+const IN=[['age','Age (years)','n',28,18,50],['g','Gender','s',['Female']],['wt','Weight (kg)','n',60,30,150],['ht','Height (cm)','n',160,130,190],['bmi','BMI (auto)','r'],['wa','Waist (inches)','n',32,20,60],['hp','Hip (inches)','n',38,25,60],['whr','Waist:Hip (auto)','r'],['irr','Menstrual cycle','s',['Regular','Irregular']],['cl','Cycle length (days)','n',5,1,15],['wg','Weight gain','s',['No','Yes']],['hg','Excess hair growth','s',['No','Yes']],['sd','Skin darkening','s',['No','Yes']],['hl','Hair loss','s',['No','Yes']],['pim','Pimples / acne','s',['No','Yes']],['ff','Fast food','s',['No','Yes']],['ex','Regular exercise','s',['No','Yes']]];
+P[8]=()=>{$('#fm').innerHTML=IN.map(x=>x[2]=='n'?`<div><label>${x[1]}</label><input type="number" id="f_${x[0]}" value="${x[3]}" min="${x[4]}" max="${x[5]}"></div>`:x[2]=='r'?`<div><label>${x[1]}</label><input id="f_${x[0]}" readonly></div>`:`<div><label>${x[1]}</label><select id="f_${x[0]}">${x[3].map((o,i)=>`<option value="${i}">${o}</option>`).join('')}</select></div>`).join('');
+const der=()=>{const v=k=>+$('#f_'+k).value;$('#f_bmi').value=(v('wt')/((v('ht')/100)**2)).toFixed(1);$('#f_whr').value=(v('wa')/v('hp')).toFixed(2)};$('#fm').oninput=der;der();$('#go').onclick=assess};
+async function assess(){const v=k=>+$('#f_'+k).value,c=D.calc;const x={'Age (yrs)':v('age'),'BMI':v('bmi'),'Waist:Hip Ratio':v('whr'),'Cycle(R/I)':v('irr'),'Cycle length(days)':v('cl'),'Weight gain(Y/N)':v('wg'),'hair growth(Y/N)':v('hg'),'Skin darkening (Y/N)':v('sd'),'Hair loss(Y/N)':v('hl'),'Pimples(Y/N)':v('pim'),'Fast food (Y/N)':v('ff'),'Reg.Exercise(Y/N)':v('ex')};
+let z=c.b;const ct=c.f.map((f,i)=>{const t=c.w[i]*x[f];z+=t;return[f.replace('(Y/N)','').replace('(R/I)','irregular').replace('(yrs)','').replace('(days)','').trim(),t]});let p=1/(1+Math.exp(-z)),src='logistic regression (in-browser fallback)',auc=c.auc;
+try{const r=await fetch('/api/predict',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(x)});if(r.ok){const j=await r.json();p=j.rf_probability;src='a Random Forest served by the Flask API';auc=c.rf_auc||c.auc}}catch(e){}
+$('#msrc').textContent=src;
+$('#res').style.display='block';$('#pv').textContent=(p*100).toFixed(0)+'% estimated PCOS risk';$('#gi').style.left=`calc(${p*100}% - 2px)`;$('#cauc').textContent=auc;
+$('#lv').textContent=p<.2?'🟢 Low risk profile':p<.5?'🟡 Moderate risk profile':p<.8?'🟠 Elevated risk profile':'🔴 High risk profile — clinical evaluation advised';
+const ref={};D.scale.forEach(()=>0);const top=ct.map(a=>a).sort((a,b)=>Math.abs(b[1])-Math.abs(a[1])).slice(0,8);
+mk('c_ct',{type:'bar',data:{labels:top.map(a=>a[0]),datasets:[{data:top.map(a=>+a[1].toFixed(2)),backgroundColor:top.map(a=>a[1]>=0?R:B)}]},options:{indexAxis:'y',plugins:{legend:{display:false},title:{display:true,text:'Largest contributions to the log-odds (raw, includes baseline offsets)'}}}});$('#res').scrollIntoView({behavior:'smooth'})}
+
+const SY=[['wg','Weight gain'],['hg','Excess hair growth'],['sd','Skin darkening'],['hl','Hair loss'],['pim','Pimples / acne']];
+P[9]=()=>{mk('c_l1',{type:'bar',data:{labels:D.life.combo.map(x=>x[0]+' (n='+x[1]+')'),datasets:[{data:D.life.combo.map(x=>x[2]),backgroundColor:[B,W,R,A]}]},options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{max:100,title:{display:true,text:'PCOS rate %'}}}}});
+const L=D.life.bmiex;mk('c_l2',{type:'bar',data:{labels:L.map(x=>x[0]),datasets:[{label:'No regular exercise',data:L.map(x=>x[2]),backgroundColor:W+'cc'},{label:'Regular exercise',data:L.map(x=>x[4]),backgroundColor:B+'cc'}]},options:{scales:{y:{max:100,title:{display:true,text:'PCOS rate %'}}}}});
+const f=(id,l,v,a,b)=>`<div><label>${l}</label><input type="number" id="${id}" value="${v}" min="${a}" max="${b}"></div>`,s=(id,l,o)=>`<div><label>${l}</label><select id="${id}">${o.map((t,i)=>`<option value="${i}">${t}</option>`).join('')}</select></div>`;
+$('#lf').innerHTML=f('l_age','Age (years)',26,15,55)+f('l_wt','Weight (kg)',68,30,150)+f('l_ht','Height (cm)',160,130,190)+f('l_whr','Waist:Hip ratio',0.85,0.6,1.2)+f('l_cl','Cycle length (days)',5,1,15)+s('l_irr','Menstrual cycle',['Regular','Irregular'])+s('l_ff','Fast food',['Rarely','Often'])+s('l_ex','Regular exercise',['No','Yes']);
+$('#lsy').innerHTML='<span class="kl" style="align-self:center">Symptoms:</span>'+SY.map(x=>`<label><input type="checkbox" id="l_${x[0]}"> ${x[1]}</label>`).join('');
+const G=[['🥗 Nutrition','Favour whole grains, legumes, vegetables, fruit, nuts and lean protein (low glycaemic-index pattern). Cut back on fast food, sugary drinks and refined snacks; the biggest gap in this dataset.'],['🏃 Movement','Aim for about 150 minutes a week of moderate activity plus 2 strength sessions. Consistency matters more than intensity. Start gradually.'],['⚖️ Weight','If BMI is above the healthy range, a 5–10% loss is often enough to improve cycle regularity and metabolic markers. Avoid crash diets.'],['😴 Sleep &amp; stress','Target 7–9 hours of consistent sleep. Poor sleep and chronic stress worsen insulin resistance; try walking, breathing exercises or yoga.'],['📅 Track your cycle','Log period dates, cycle length and symptoms in a diary or app. Trends help doctors far more than memory.'],['🩺 See a doctor if','Cycles are consistently irregular or absent, you have rapidly worsening acne, hair growth or hair loss, or you are trying to conceive. Blood tests and an ultrasound are how PCOS is confirmed.']];
+$('#lg').innerHTML=G.map(x=>`<div class="c"><h4>${x[0]}</h4><span class="kl" style="font-size:14px">${x[1]}</span></div>`).join('');
+$('#lgo').onclick=lifePlan};
+function rk(x){const c=D.calc;let z=c.b;c.f.forEach((f,i)=>z+=c.w[i]*x[f]);return 1/(1+Math.exp(-z))}
+function lifePlan(){const v=k=>+$('#'+k).value,ck=k=>$('#l_'+k).checked?1:0,bmi=v('l_wt')/((v('l_ht')/100)**2);
+const x={'Age (yrs)':v('l_age'),'BMI':bmi,'Waist:Hip Ratio':v('l_whr'),'Cycle(R/I)':v('l_irr'),'Cycle length(days)':v('l_cl'),'Weight gain(Y/N)':ck('wg'),'hair growth(Y/N)':ck('hg'),'Skin darkening (Y/N)':ck('sd'),'Hair loss(Y/N)':ck('hl'),'Pimples(Y/N)':ck('pim'),'Fast food (Y/N)':v('l_ff'),'Reg.Exercise(Y/N)':v('l_ex')};
+const w=(o)=>rk(Object.assign({},x,o));const sc=[['Current profile',rk(x)],['BMI −5%',w({BMI:bmi*.95})],['BMI −10%',w({BMI:bmi*.9})],['Add regular exercise',w({'Reg.Exercise(Y/N)':1})],['Cut fast food',w({'Fast food (Y/N)':0})],['Cut fast food + BMI −10%',w({'Fast food (Y/N)':0,BMI:bmi*.9})]];
+$('#lres').style.display='block';
+mk('c_l3',{type:'bar',data:{labels:sc.map(a=>a[0]),datasets:[{data:sc.map(a=>+(a[1]*100).toFixed(0)),backgroundColor:sc.map((a,i)=>i?B:A)}]},options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{max:100,title:{display:true,text:'Estimated PCOS risk %'}}}}});
+const r=[],p=sc[0][1],ns=SY.filter(k=>ck(k[0])).length;
+if(bmi>=25){const kg=v('l_wt')*.05,kg2=v('l_wt')*.1;r.push(`Your BMI is ${bmi.toFixed(1)}. A 5–10% weight reduction means about ${kg.toFixed(1)}–${kg2.toFixed(1)} kg, done gradually with a doctor or dietitian.`)}else if(bmi<18.5)r.push(`Your BMI (${bmi.toFixed(1)}) is below the healthy range; focus on adequate nutrition rather than weight loss.`);else r.push(`Your BMI (${bmi.toFixed(1)}) is in the healthy range; maintain it with balanced meals and regular activity.`);
+if(v('l_ff'))r.push('Fast food is the strongest lifestyle signal in this dataset. Try swapping most fast-food meals for home-cooked, high-fibre, low-sugar options.');
+if(!v('l_ex'))r.push('Build up to ~150 min/week of moderate activity (brisk walking, cycling, swimming) plus 2 short strength sessions.');
+if(v('l_irr'))r.push('You reported irregular cycles: track dates and length for 3 months and share the log with a clinician.');
+if(v('l_whr')>=.85)r.push(`Waist:hip ratio ${v('l_whr')} suggests central fat distribution; strength training and reducing refined carbs can help.`);
+if(ns>=3||p>=.5)r.push(`Your score is ${(p*100).toFixed(0)}%${ns>=3?' with '+ns+' symptoms':''}. Consider booking a medical evaluation (hormone panel and pelvic ultrasound).`);
+r.push('Prioritise 7–9 hours of sleep and a stress-management habit; both influence insulin and hormone balance.');
+$('#lrec').innerHTML=r.map(t=>`<li>${t}</li>`).join('');$('#lres').scrollIntoView({behavior:'smooth'})}
+go(0);
+</script></body></html>
