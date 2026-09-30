@@ -30,6 +30,9 @@ Returns `{"rf_probability": 0.68, "risk_level": "elevated"}`. Out-of-range or mi
 Push to GitHub → New Web Service → it reads `render.yaml`
 (build: `pip install -r requirements.txt && python analysis.py`, start: `gunicorn app:app`).
 
+## Screenshots
+![Overview](screenshots/overview.png)
+
 ## Notes
 - Cycle(R/I) is coded 2 = regular, 4 = irregular in the raw data → recoded to 0/1.
 - Charts load Chart.js from a CDN; for offline use, download it and change the `<script src>` in `templates/index.html`.
